@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <!-- add title -->
+    <title></title>
+
+    <!-- importing libraries here -->
+    <script src="lib/d3-dsv.min.js"></script>
+    <script src="lib/d3-geo-projection.v2.min.js"></script>
+    <script src="lib/d3-legend.min.js"></script>
+    <script src="lib/d3-tip.min.js"></script>
+    <script src="lib/d3.v5.min.js"></script>
+    <script src="lib/topojson.v2.min.js"></script>
+
+    <style>
+        /* CSS rules */
+        .d3-tip {
+        line-height: 1;
+        font-weight: bold;
+        padding: 10px;
+        background: rgba(255, 255, 255, 1);
+        color: #000000;
+        border: 2px solid #000000;
+        pointer-events: none;
+        font-size: 14px;
+        position: absolute;
+        font-size: 14px;
+        }
+    </style>
+
+    
+</head>
+
+
+<body>
+    <!-- Heading for the visualization -->
+    <h1 align="center"> Choropleth Map of Board Game Ratings </h1>
+
+    <!-- Drop Down Element.-->
+    Select Feature:<select id="gameDropdown"></select>
+
+    <div class="slidecontainer">
+        Select Month:
+        <input type="range" min="1" max="12" value="1" class="slider" id="MonthRange">
+        Select Year:
+        <input type="range" min="2017" max="2019" value="2017" class="slider" id="YearRange">
+    </div>
+    
+    <!-- Container div for both SVG -->
+    <div id="container" align = "center"></div>
+
+    <script src="choropleth_map.js"></script>
+
+</body>
+
+</html>
