@@ -13,7 +13,7 @@ var svg = d3.select("#container")
 //
 // Creating Color Scale
 var colorScale = d3.scaleQuantile()
-    .range(["#fee5d9", "#fcae91", "#fb6a4a", "#cb181d"])
+    .range(["#eff3ff", "#bdd7e7", "#6baed6", "#3182bd", "#08519c"])
 
 //
 // enter code to define tooltip
@@ -21,7 +21,7 @@ const tooltip = d3.tip()
     .attr('class', 'd3-tip')
     .attr("id", "tooltip")
     .html(function(d){
-        
+        return `Precinct: ${d.properties["Precinct"]}<br> Correlation Coefficient: ${d.properties["Rsq"]}`;
     });
 
 //
@@ -31,7 +31,6 @@ var path = d3.geoPath().projection(projection);
 
 //
 // Global Variables
-
 
 // Taking in Data and Calling ready()
 Promise.all([
@@ -94,9 +93,8 @@ function createMapAndLegend(nycJson, corrData, valFeature, valMonth, valYear){
 
     svg.call(tooltip);
 
-    var dater = createDater(valMonth, valYear);
-
-    var filteredData = createFilteredData(corrData, valFeature, dater);
+    // Filtering Data based on Selections (dater is ju)
+    var filteredData = createFilteredData(corrData, valFeature, valMonth, valYear);
 
     // Append Data into JSON
     for (var j = 0; j < Object.keys(nycJson.features).length-1; j++){
@@ -107,36 +105,17 @@ function createMapAndLegend(nycJson, corrData, valFeature, valMonth, valYear){
         };
     };
 
-    var countries = svg.append("g")
-        .attr("id", "countries");
-    
-    // const ascender = [];
-    // if(filtered_data != null){
-    //     for (var l = 0; l < filtered_data.length; l++ ){
-    //         ascender[l] = parseFloat(filtered_data[l][2]);
-    //     };
-    // };
-
-    // ascender.sort(function(a,b){
-    //     return a-b
-    // });
-
-    // var quantile2 = medianer(ascender);
-
-    // temp1 = ascender.slice(0, Math.floor(ascender.length/2))
-    // var quantile1 = medianer(temp1);
-
-    // temp2 = ascender.slice(Math.ceil(ascender.length/2), ascender.length)
-    // var quantile3 = medianer(temp2);
-
-    // colorScale.domain(ascender);
-
     // Building ColorScale
     const listOfAllRSQ = []
     for(var i = 0; i < filteredData.length; i++){
         listOfAllRSQ[i] = filteredData[i][1]
     };
     colorScale.domain(listOfAllRSQ);
+
+
+    // Building the Map Using Paths
+    var countries = svg.append("g")
+        .attr("id", "countries");
 
     var paths = countries.selectAll("#countries")
         .data(nycJson.features)
@@ -151,91 +130,24 @@ function createMapAndLegend(nycJson, corrData, valFeature, valMonth, valYear){
         })
         .on("mouseover", tooltip.show)
         .on("mouseout", tooltip.hide);
-    
-    // var legend = svg.append("g")
-    //     .attr("id", "legend");
 
-    //     legend.append("rect")
-    //         .attr("x", 1000)
-    //         .attr("y", 120)
-    //         .attr("width", 15)
-    //         .attr("height", 15)
-    //         .style("fill", "#fee5d9");
-    //     legend.append("text")
-    //         .attr("x", 1020)
-    //         .attr("y", 130)
-    //         .text(`${Math.round(ascender[0] * 100) / 100} to ${Math.round(quantile1 * 100) / 100}`)
-    //         .style("font-size", "15px")
-    //         .attr("alignment-baseline","middle");
-        
-    //     legend.append("rect")
-    //         .attr("x", 1000)
-    //         .attr("y", 135)
-    //         .attr("width", 15)
-    //         .attr("height", 15)
-    //         .style("fill", "#fcae91");
-    //     legend.append("text")
-    //         .attr("x", 1020)
-    //         .attr("y", 145)
-    //         .text(`${Math.round(quantile1 * 100) / 100} to ${Math.round(quantile2 * 100) / 100}`)
-    //         .style("font-size", "15px")
-    //         .attr("alignment-baseline","middle");
-
-    //     legend.append("rect")
-    //         .attr("x", 1000)
-    //         .attr("y", 150)
-    //         .attr("width", 15)
-    //         .attr("height", 15)
-    //         .style("fill", "#fb6a4a");
-    //     legend.append("text")
-    //         .attr("x", 1020)
-    //         .attr("y", 160)
-    //         .text(`${Math.round(quantile2 * 100) / 100} to ${Math.round(quantile3 * 100) / 100}`)
-    //         .style("font-size", "15px")
-    //         .attr("alignment-baseline","middle");
-
-    //     legend.append("rect")
-    //         .attr("x", 1000)
-    //         .attr("y", 165)
-    //         .attr("width", 15)
-    //         .attr("height", 15)
-    //         .style("fill", "#cb181d");
-    //     legend.append("text")
-    //         .attr("x", 1020)
-    //         .attr("y", 175)
-    //         .text(`${Math.round(quantile3 * 100) / 100} to ${Math.round(ascender[ascender.length-1] * 100) / 100}`)
-    //         .style("font-size", "15px")
-    //         .attr("alignment-baseline","middle");
 };
 
-function medianer(array){
-    val = (array.length/2);
-    if(val.isInteger){
-        return array[val];
-    }
-    else{
-        return (array[Math.floor(val)]+array[Math.ceil(val)])/2
-    }
-};
-
-function createFilteredData(corrData, valFeature, dater){
+function createFilteredData(corrData, valFeature, valMonth, valYear){
+    // Filter data only for the specified time and specified feature
+    const dater = createDater(valMonth, valYear);
     var data = [];
     for (var i = 0; i < Object.keys(corrData).length-1; i++){
         if((corrData[i]['Time'] == dater) && (corrData[i]['Feature']==valFeature)){
             data.push([corrData[i]['Precinct'], corrData[i]['Rsq']]);
         }
-        // if(((corrData[i]['Time'])==dater) && (corrData[i]['Feature']==valFeature)){
-        //     console.log(corrData[i]['Time'])
-        //     // data.push([corrData[i]['Precinct'], corrData[i]['Rsq']]);
-        // };
     };
-
     return data
 };
 
 function createDater(valMonth, valYear){
     var valMonth2Dig = valMonth;
-
+    // Make month = 1,2 etc to 01,02 etc.
     if(parseInt(valMonth)<10){
         valMonth2Dig = 0+valMonth
     }
