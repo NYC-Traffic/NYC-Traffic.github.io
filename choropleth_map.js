@@ -173,9 +173,8 @@ function makeQuotaChoro(nycJson, allData, valMonth, valYear){
     svg.call(tooltip);
     // DEFINE SCALE
     var colorScale = d3.scaleOrdinal()
-        .range(["#08529D" , "#f7f7f7", "#C0C0C0"]) // first is blue
+        .range(["#08529D", "#f7f7f7", "#C0C0C0"]) // first is blue
         .domain(["True", "", "False"]); // Use an array for the domain
-
 
     // BUILD MAP USING PATHS
     var countries = svg.append("g")
@@ -222,18 +221,23 @@ function makeQuotaChoro(nycJson, allData, valMonth, valYear){
         });
 
     legend.selectAll("text")
-        .data(colorScale.domain().reverse())
+        .data(colorScale.range().reverse())
         .enter()
         .append('text')
         .attr("x", 110)
         .attr("y", function(d, i) {
-            return i * 30 + 315 - 30;
+            return i * 30 + 315;
         })
-        .text(function(d){
-            if(d == ""){
+        .text(function(d, j){
+            if(j == 0){
+                return "False"
+            }
+            if(j == 1){
                 return "Data Not Available"
             }
-            return d
+            if(j == 2){
+                return "True"
+            }
         })
         .style("font-family", "Arial, Helvetica, sans-serif") // Set font family
         .style("font-size", "16px");
