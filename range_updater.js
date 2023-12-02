@@ -1,3 +1,18 @@
+window.onload = function() {
+    // Define the desired default zoom level
+    var desiredZoomLevel = 1;
+  
+    // Calculate the screen width in CSS pixels
+    var screenWidth = window.innerWidth * window.devicePixelRatio;
+  
+    // Set the zoom level based on the screen width
+    var currentZoomLevel = screenWidth / 1920; // Assuming a standard 15-inch laptop width of 1920 pixels
+    var zoomFactor = desiredZoomLevel / currentZoomLevel;
+  
+    // Apply the zoom level to the body element
+    document.body.style.zoom = zoomFactor;
+  };
+
 var sliderForMonth = document.getElementById("MonthRange")
 var sliderForYear = document.getElementById("YearRange")
 
