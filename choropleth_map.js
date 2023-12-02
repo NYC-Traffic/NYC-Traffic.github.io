@@ -145,7 +145,7 @@ function makeQuotaChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("Choose other data <br> Data for this time period not available");
+            .html("Data for this time period not available <br> Please choose a different time period!");
 
         explanationDiv.innerHTML = "";
         return;
@@ -278,7 +278,7 @@ function makeViolChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("Choose other data <br> Data for this time period not available");
+            .html("Data for this time period not available <br> Please choose a different time period!");
 
         explanationDiv.innerHTML = "";
         return;
@@ -413,7 +413,7 @@ function makeColliChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("Choose other data <br> Data for this time period not available");
+            .html("Data for this time period not available <br> Please choose a different time period!");
 
         explanationDiv.innerHTML = "";
         return;
@@ -541,7 +541,7 @@ function makePlateChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("Choose other data <br> Data for this time period not available");
+            .html("Data for this time period not available <br> Please choose a different time period!");
 
         explanationDiv.innerHTML = "";
         return;
@@ -682,7 +682,7 @@ function makeTimeChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("Choose other data <br> Data for this time period not available");
+            .html("Data for this time period not available <br> Please choose a different time period!");
         
         explanationDiv.innerHTML = "";
         return;
@@ -816,7 +816,7 @@ function makeColorChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("Choose other data <br> Data for this time period not available");
+            .html("Data for this time period not available <br> Please choose a different time period!");
         
         explanationDiv.innerHTML = "";
         return;
@@ -947,7 +947,7 @@ function makeTypeChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("Choose other data <br> Data for this time period not available");
+            .html("Data for this time period not available <br> Please choose a different time period!");
         
         explanationDiv.innerHTML = "";
         return;
