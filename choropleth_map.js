@@ -145,7 +145,7 @@ function makeQuotaChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("CHOOSE OTHER DATA, DATA FOR THIS TIME PERIOD NOT AVAILABLE");
+            .text("Choose other data <br> Data for this time period not available");
 
         explanationDiv.innerHTML = "";
         return;
@@ -278,7 +278,7 @@ function makeViolChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("CHOOSE OTHER DATA, DATA FOR THIS TIME PERIOD NOT AVAILABLE");
+            .text("Choose other data <br> Data for this time period not available");
 
         explanationDiv.innerHTML = "";
         return;
@@ -413,7 +413,7 @@ function makeColliChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("DATA FOR THIS TIME PERIOD NOT AVAILABLE <br> PLEASE CHOOSE OTHER DATA ");
+            .text("Choose other data <br> Data for this time period not available");
 
         explanationDiv.innerHTML = "";
         return;
@@ -541,7 +541,7 @@ function makePlateChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("CHOOSE OTHER DATA, DATA FOR THIS TIME PERIOD NOT AVAILABLE");
+            .text("Choose other data <br> Data for this time period not available");
 
         explanationDiv.innerHTML = "";
         return;
@@ -682,7 +682,7 @@ function makeTimeChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("CHOOSE OTHER DATA, DATA FOR THIS TIME PERIOD NOT AVAILABLE");
+            .text("Choose other data <br> Data for this time period not available");
         
         explanationDiv.innerHTML = "";
         return;
@@ -816,7 +816,7 @@ function makeColorChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("CHOOSE OTHER DATA, DATA FOR THIS TIME PERIOD NOT AVAILABLE");
+            .text("Choose other data <br> Data for this time period not available");
         
         explanationDiv.innerHTML = "";
         return;
@@ -839,14 +839,14 @@ function makeColorChoro(nycJson, allData, valMonth, valYear){
         .attr('class', 'd3-tip')
         .attr("id", "tooltip")
         .html(function(d){
-            return `In Precinct ${d.properties["Precinct"]}, ${d.properties["percVehicleColor"]} of the vehicles ticketed are ${d.properties["vehicleColor"].toLowerCase()} in color!`
+            return `In Precinct ${d.properties["Precinct"]}, ${d.properties["percVehicleColor"]}% of the vehicles ticketed are ${d.properties["vehicleColor"].toLowerCase()} in color!`
         });
 
     svg.call(tooltip);
 
     // DEFINE SCALE
     var colorScale = d3.scaleOrdinal()
-        .range(["#FFFFFF", "#DEB887", "#778899" , "#2F4F4F", "#fb9a99"]) // 3rd is blue
+        .range(["#FFFFFF", "#DEB887", "#778899" , "#343434", "#08529d"]) // last is blue
         .domain(['WHITE', 'BROWN', 'GRAY', 'BLACK', 'OTHER']);
 
     // BUILD MAP USING PATHS
@@ -947,7 +947,7 @@ function makeTypeChoro(nycJson, allData, valMonth, valYear){
         d3.select("#svgContainer")
             .append("text")
             .attr("class", "textBox")
-            .text("CHOOSE OTHER DATA, DATA FOR THIS TIME PERIOD NOT AVAILABLE");
+            .text("Choose other data <br> Data for this time period not available");
         
         explanationDiv.innerHTML = "";
         return;
@@ -970,7 +970,7 @@ function makeTypeChoro(nycJson, allData, valMonth, valYear){
         .attr('class', 'd3-tip')
         .attr("id", "tooltip")
         .html(function(d){
-            return `In Precinct ${d.properties["Precinct"]}, ${d.properties["percVehicleType"]} of the vehicles ticketed are ${d.properties["vehicleType"].toLowerCase()}s!`
+            return `In Precinct ${d.properties["Precinct"]}, ${d.properties["percVehicleType"]}% of the vehicles ticketed are ${d.properties["vehicleType"].toLowerCase()}s!`
         });
 
     svg.call(tooltip);
