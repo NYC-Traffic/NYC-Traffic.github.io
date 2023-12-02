@@ -9,7 +9,15 @@ var path = d3.geoPath().projection(projection);
 
 //
 // EXPLANATION ARRAY
-var explanationArr = ["Quota Choro", "Viol Choro", "Colli Choro", "Plate Choro", "Time Choro", "Color Choro", "Type Choro"]
+var explanationArr = [
+"This choropleth displays precincts' tendency to increase violations at month-end to meet a quota.", 
+"This choropleth displays the distribution of the total fines associated with parking violations throughout precincts in NYC.", 
+"This choropleth shows the number of collisions in the precincts.", 
+"This choropleth shows the most common plate type (Passenger vs Commerical vs Others) for ticketed vehicles in the given precincts.",
+"This choropleth shows the most common time of day for receiving parking tickets in a given precinct.",
+"This choropleth shows the most frequent color for ticketed vehicles in the given precinct.",
+"This choropleth displays the the vehicle type with the maximum percentage of parking violations in the precincts."
+]
 
 
 // --- --- --- --- GETTING DATA --- --- --- ---
@@ -626,7 +634,7 @@ function makePlateChoro(nycJson, allData, valMonth, valYear){
                 return "Passenger Vehicles"
             }
             if(d == ""){
-                return "Data Not Available"
+                return "Other Plate Type"
             }
             if(d == "commercial"){
                 return "Commercial Vehicles"
@@ -838,7 +846,7 @@ function makeColorChoro(nycJson, allData, valMonth, valYear){
 
     // DEFINE SCALE
     var colorScale = d3.scaleOrdinal()
-        .range(["#FFFFFF", "#DEB887", "#778899" , "#2F4F4F", "#57555533"]) // 3rd is blue
+        .range(["#FFFFFF", "#DEB887", "#778899" , "#2F4F4F", "#fb9a99"]) // 3rd is blue
         .domain(['WHITE', 'BROWN', 'GRAY', 'BLACK', 'OTHER']);
 
     // BUILD MAP USING PATHS
