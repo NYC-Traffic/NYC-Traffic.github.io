@@ -221,6 +221,15 @@
 
 
 <body>
+    <script>
+        // Check if the user's browser is Firefox
+        var isFirefox = typeof InstallTrigger !== 'undefined';
+    
+        // Show a warning if the browser is Firefox
+        if (isFirefox) {
+            alert("Warning: This website may not work optimally on Firefox. Please consider using a different browser for a better experience.");
+        }
+    </script>
     <div class="firstVisualization">
         <div class="leftFirstVisualization">
             <div class="overlay" id="explanationOverlay">
