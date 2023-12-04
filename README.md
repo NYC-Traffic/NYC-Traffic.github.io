@@ -1,2 +1,2 @@
 # NYC-Traffic.github.io
-Hosting Visualization for the NYC Traffic Project
+Hosting D3.js Visualizations for the NYC Traffic Project
